@@ -5,7 +5,8 @@ const {
     MongoClient
 } = require("mongodb")
 
-// Can be changed to test environments for better coding
+// Can be altered to a test environment for a local mongo db
+// For now, I will use from a single entrypoint of environment variables
 const uri = process.env.MONGO_URL;
 const client = new MongoClient(uri, {
     retryWrites: true,
