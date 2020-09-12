@@ -1,14 +1,26 @@
 require("dotenv").config();
 var express = require("express"),
   bodyParser = require("body-parser"),
-  { MongoClient } = require("mongodb"),
+  {
+    MongoClient
+  } = require("mongodb"),
   app = express(),
   port = process.env.PORT || 5000,
-  { getQuery, getResponse } = require("./utils"),
-  { body, validationResult } = require("express-validator");
+  {
+    getQuery,
+    getResponse
+  } = require("./utils"),
+  {
+    body,
+    validationResult
+  } = require("express-validator");
 
 // Errors
-const { BadRequest, NotFound, handleErrors } = require("./errors");
+const {
+  BadRequest,
+  NotFound,
+  handleErrors
+} = require("./errors");
 
 // Mongo DB init
 const uri = process.env.MONGO_URL;
@@ -55,7 +67,6 @@ app.use(handleErrors);
 async function run() {
   try {
     await client.connect();
-    console.log("UIRRRL", process.env.MONGO_DB);
     collection = client
       .db(process.env.MONGO_DB)
       .collection(process.env.MONGO_COLLECTION);
