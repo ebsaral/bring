@@ -36,8 +36,8 @@ var connection;
 const parameterValidator = [
   body("startDate").isDate(),
   body("endDate").isDate(),
-  body("minCount").isNumeric(),
-  body("maxCount").isNumeric(),
+  body("minCount").isInt(),
+  body("maxCount").isInt(),
 ];
 
 app.use(bodyParser.json());
@@ -48,6 +48,7 @@ app.post("/", parameterValidator, async function (req, res, next) {
     if (!errors.isEmpty()) {
       throw new BadRequest("Invalid parameter(s)");
     }
+
     const query = getQuery(req.body);
     const cursor = collection.aggregate(query);
     let elements = await cursor.toArray();
@@ -77,7 +78,9 @@ async function run() {
       .db(process.env.MONGO_DB)
       .collection(process.env.MONGO_COLLECTION);
     app.listen(port, function (err) {
-      console.log(err)
+      if (err) {
+        console.log(err)
+      }
     });
   } catch (e) {
     console.log("Error ", e);

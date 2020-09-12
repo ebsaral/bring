@@ -24,8 +24,8 @@ function getQuery(payload) {
         {
             $match: {
                 totalCount: {
-                    $gte: payload.minCount,
-                    $lte: payload.maxCount
+                    $gte: parseInt(payload.minCount),
+                    $lte: parseInt(payload.maxCount)
                 },
                 createdAt: {
                     $gte: minDate,
