@@ -1,0 +1,30 @@
+{
+  "name": "bring",
+  "version": "1.0.0",
+  "description": "a dummy node.js project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app/index.js",
+    "start:dev": "nodemon app/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ebsaral/bring.git"
+  },
+  "author": "Emin Bugra Saral",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ebsaral/bring/issues"
+  },
+  "homepage": "https://github.com/ebsaral/bring#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.1",
+    "mongodb": "^3.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
