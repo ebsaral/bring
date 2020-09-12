@@ -1,19 +1,17 @@
+require("dotenv").config();
 var express = require("express"),
   bodyParser = require("body-parser"),
   { MongoClient } = require("mongodb"),
   app = express(),
-  port = 3070,
+  port = process.env.PORT || 5000,
   { getQuery, getResponse } = require("./utils"),
   { body, validationResult } = require("express-validator");
 
 // Errors
 const { BadRequest, NotFound, handleErrors } = require("./errors");
 
-// Constants
-const { MONGO_URL, MONGO_DB, MONGO_COLLECTION } = require("./constants");
-
 // Mongo DB init
-const uri = MONGO_URL;
+const uri = process.env.MONGO_URL;
 const client = new MongoClient(uri, {
   retryWrites: true,
   useUnifiedTopology: true,
@@ -57,7 +55,10 @@ app.use(handleErrors);
 async function run() {
   try {
     await client.connect();
-    collection = client.db(MONGO_DB).collection(MONGO_COLLECTION);
+    console.log("UIRRRL", process.env.MONGO_DB);
+    collection = client
+      .db(process.env.MONGO_DB)
+      .collection(process.env.MONGO_COLLECTION);
     app.listen(port, function (err) {
       console.log("Running on " + port);
     });
