@@ -1,19 +1,19 @@
 require("dotenv").config();
-var express = require("express"),
-  bodyParser = require("body-parser"),
-  {
-    MongoClient
-  } = require("mongodb"),
-  app = express(),
-  port = process.env.PORT || 5000,
-  {
-    getQuery,
-    getResponse
-  } = require("./utils"),
-  {
-    body,
-    validationResult
-  } = require("express-validator");
+// Express 
+var express = require("express")
+var bodyParser = require("body-parser")
+var app = express()
+var port = process.env.PORT || 5000
+
+const {
+  getQuery,
+  getResponse
+} = require("./utils")
+
+const {
+  body,
+  validationResult
+} = require("express-validator")
 
 // Errors
 const {
@@ -23,14 +23,15 @@ const {
 } = require("./errors");
 
 // Mongo DB init
+const {
+  MongoClient
+} = require("mongodb")
 const uri = process.env.MONGO_URL;
 const client = new MongoClient(uri, {
   retryWrites: true,
   useUnifiedTopology: true,
 });
-let connection;
-
-app.use(bodyParser.json());
+var connection;
 
 const parameterValidator = [
   body("startDate").isDate(),
@@ -38,6 +39,8 @@ const parameterValidator = [
   body("minCount").isNumeric(),
   body("maxCount").isNumeric(),
 ];
+
+app.use(bodyParser.json());
 
 app.post("/", parameterValidator, async function (req, res, next) {
   try {
@@ -54,6 +57,7 @@ app.post("/", parameterValidator, async function (req, res, next) {
   }
 });
 
+// Cover of rest of the URLs
 app.get("*", function (req, res) {
   throw new NotFound("Invalid endpoint");
 });
@@ -62,8 +66,10 @@ app.post("*", function (req, res) {
   throw new NotFound("Invalid endpoint");
 });
 
+// Error middleware
 app.use(handleErrors);
 
+// Wrapper of listener with the MongoEngine connection
 async function run() {
   try {
     await client.connect();
