@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node app/index.js",
     "start:dev": "nodemon app/index.js",
+    "build": "webpack --mode=production",
+    "prod": "node dist/api.bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +28,8 @@
     "mongodb": "^3.6.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   }
 }
