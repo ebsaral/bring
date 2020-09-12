@@ -1,14 +1,13 @@
 # from base image node
 FROM node:8.11-slim
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# copying all the files from your file system to container file system
-COPY package.json .
+ENV NODE_ENV=production
 
-# install all dependencies
+COPY package*.json ./
 RUN npm install
 
-# copy oter files as well
-COPY ./ .
+COPY . .
+
+CMD npm start

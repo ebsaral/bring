@@ -76,7 +76,9 @@ async function run() {
     collection = client
       .db(process.env.MONGO_DB)
       .collection(process.env.MONGO_COLLECTION);
-    app.listen(port);
+    app.listen(port, function (err) {
+      console.log(err)
+    });
   } catch (e) {
     console.log("Error ", e);
   }
