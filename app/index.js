@@ -70,11 +70,11 @@ async function run() {
     collection = client
       .db(process.env.MONGO_DB)
       .collection(process.env.MONGO_COLLECTION);
-    app.listen(port, function (err) {
-      console.log("Running on " + port);
-    });
+    app.listen(port);
   } catch (e) {
     console.log("Error ", e);
   }
 }
 run().catch(console.dir);
+
+module.exports = app

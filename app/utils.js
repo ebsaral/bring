@@ -38,14 +38,14 @@ function getQuery(payload) {
     return query;
 }
 
-function getResponse(type, msg, elements = []) {
+function getResponse(type, msg, results = []) {
     const response = {
         code: type,
         msg: msg,
     }
 
     if (type == 0) {
-        response["results"] = elements
+        response["results"] = results
     }
     return response
 }
