@@ -5,6 +5,7 @@ const {
     MongoClient
 } = require("mongodb")
 
+// Can be changed to test environments for better coding
 const uri = process.env.MONGO_URL;
 const client = new MongoClient(uri, {
     retryWrites: true,
